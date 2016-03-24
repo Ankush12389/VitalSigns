@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">VitalSigns</string>
+
+    <string name="hello_world">Please enter the details here :</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_rates">RatesActivity</string>
+    <string name="suggestRR">Put your finger on the camera for 10 full breaths</string>
+</resources>
