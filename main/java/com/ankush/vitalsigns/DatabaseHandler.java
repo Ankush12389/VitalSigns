@@ -15,7 +15,7 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database Name
     private static final String DATABASE_NAME = "signsValuesManager";
@@ -32,9 +32,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_outside = "outside";
     private static final String KEY_wakeUp = "wakeUp";
     private static final String KEY_meal = "meal";
-    private static final String KEY_feelm = "feelm";
+    private static final String KEY_feelm = "feelMeal";
     private static final String KEY_rr = "rr";
     private static final String KEY_hr = "hr";
+    private static final String KEY_isAttack = "isAttack";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -54,7 +55,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 KEY_meal + " INTEGER," +
                 KEY_feelm + " INTEGER," +
                 KEY_rr + " INTEGER," +
-                KEY_hr + " INTEGER"
+                KEY_hr + " INTEGER," +
+                KEY_isAttack +" INTEGER"
                 + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
@@ -62,6 +64,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
 
@@ -95,6 +98,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_feelm, sv.m_feelMeal);
         values.put(KEY_rr, sv.m_rr);
         values.put(KEY_hr, sv.m_hr);
+        values.put(KEY_isAttack, sv.m_isAttack);
 
         db.insert(TABLE_CONTACTS, null, values);
         db.close();
@@ -123,7 +127,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                 cursor.getInt(7),
                                 cursor.getInt(8),
                                 cursor.getInt(9),
-                                cursor.getInt(10)
+                                cursor.getInt(10),
+                                cursor.getInt(11)
                         );
                 ret.add(sv);
             } while (cursor.moveToNext());
@@ -153,19 +158,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                                 cursor.getInt(7),
                                 cursor.getInt(8),
                                 cursor.getInt(9),
-                                cursor.getInt(10)
+                                cursor.getInt(10),
+                                cursor.getInt(11)
                         );
             cursor.close();
             return sv;
         } else {
-            return new SignsValues(0,0,0,0,0,0,0,0,0,0,0);
+            return new SignsValues(0,0,0,0,0,0,0,0,0,0,0,0);
         }
 
     }
 
     public void deleteAllContents() {
         SQLiteDatabase db = this.getWritableDatabase(); //get database
-        db.execSQL("DELETE FROM "+TABLE_CONTACTS); //delete all rows in a table
+        db.execSQL("DELETE FROM " + TABLE_CONTACTS); //delete all rows in a table
         db.close();
     }
 }

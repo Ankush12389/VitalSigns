@@ -11,7 +11,8 @@ public class SignsValues {
             m_wakeUp,
             m_meal,
             m_feelMeal,
-            m_hr;
+            m_hr,
+            m_isAttack;
 
     double m_rr;
 
@@ -27,7 +28,8 @@ public class SignsValues {
             int meal,
             int feelMeal,
             double rr,
-            int hr
+            int hr,
+            int isAttack
     ) {
         this.m_startOfYear = startOfYear;
         this.m_exercise = exercise;
@@ -39,7 +41,8 @@ public class SignsValues {
         this.m_meal = meal;
         this.m_feelMeal = feelMeal;
         this.m_rr = rr;
-        this.m_hr = hr;    
+        this.m_hr = hr;
+        this.m_isAttack = isAttack;
     }
 
     public SignsValues addTime(int add){
@@ -54,7 +57,8 @@ public class SignsValues {
                 this.m_meal+add,
                 this.m_feelMeal,
                 this.m_rr,
-                this.m_hr
+                this.m_hr,
+                this.m_isAttack
         );
     }
 }

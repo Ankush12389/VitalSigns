@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class LoggerActivity extends ActionBarActivity {
             TextView textVwakeUp,
             TextView textVmeal,
             TextView textVfeelMeal,
+            Switch switchAttack,
             DatabaseHandler db
     ) {
         Time nowTime = new Time();
@@ -55,7 +57,9 @@ public class LoggerActivity extends ActionBarActivity {
             textVwakeUp.setText("" + svShifted.m_wakeUp);
             textVmeal.setText("" + svShifted.m_meal);
             textVfeelMeal.setText("" + svShifted.m_feelMeal);
+            switchAttack.setChecked(svShifted.m_isAttack==1);
         }
+
     }
 
     @Override
@@ -74,6 +78,7 @@ public class LoggerActivity extends ActionBarActivity {
         final TextView textVfeelMeal = ((TextView) findViewById(R.id.feelMeal));
         final TextView textVrr = ((TextView) findViewById(R.id.RRText));
         final TextView textVhr = ((TextView) findViewById(R.id.HRText));
+        final Switch switchAttack = ((Switch) findViewById(R.id.switch1));
 
         final DatabaseHandler db = new DatabaseHandler(this);
 
@@ -93,6 +98,7 @@ public class LoggerActivity extends ActionBarActivity {
                         int feelMeal = Integer.parseInt(safeGet(textVfeelMeal));
                         double rr = Double.parseDouble(safeGet(textVrr));
                         int hr = Integer.parseInt(safeGet(textVhr));
+                        boolean isAttack = switchAttack.isChecked();
 
                         SignsValues sv =
                                 new SignsValues(
@@ -106,7 +112,8 @@ public class LoggerActivity extends ActionBarActivity {
                                         meal,
                                         feelMeal,
                                         rr,
-                                        hr
+                                        hr,
+                                        isAttack ? 1 : 0
                                 );
 
                         db.addRow(sv);
@@ -128,6 +135,7 @@ public class LoggerActivity extends ActionBarActivity {
                 textVwakeUp,
                 textVmeal,
                 textVfeelMeal,
+                switchAttack,
                 db
         );
 
@@ -145,6 +153,7 @@ public class LoggerActivity extends ActionBarActivity {
                         textVwakeUp,
                         textVmeal,
                         textVfeelMeal,
+                        switchAttack,
                         db
                 );
             }
