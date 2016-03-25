@@ -111,6 +111,7 @@ public class LoggerActivity extends ActionBarActivity {
 
                         db.addRow(sv);
                         int totalRecords = db.countRows();
+
                         Toast toast = Toast.makeText(getApplicationContext(), "Record saved! Total records: "+totalRecords, Toast.LENGTH_LONG);
                         toast.show();
 
@@ -194,6 +195,8 @@ public class LoggerActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            final DatabaseHandler db = new DatabaseHandler(this);
+            db.deleteAllContents();
             return true;
         }
 

@@ -52,9 +52,9 @@ public class SignsValues {
                 this.m_outside+add,
                 this.m_wakeUp+add,
                 this.m_meal+add,
-                this.m_feelMeal+add,
-                this.m_rr+add,
-                this.m_hr+add
+                this.m_feelMeal,
+                this.m_rr,
+                this.m_hr
         );
     }
 }
